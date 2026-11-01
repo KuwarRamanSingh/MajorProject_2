@@ -1,52 +1,96 @@
 <style>
-  .search-btn {
-    background-color: #fe424d;
-    color: #fff;
-    border-radius: 25px;
-    padding: 0 1rem 0 1rem;
-  }
-  .search-btn:hover {
-    background-color: #fe424d;
-    color: #fff;
+  /* Flex parent layout fix */
+  .navbar-collapse {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 
-  .search-btn i {
-    display: inline;
-    margin-right: 0.5rem;
+  /* Center Container Fix */
+  .search-nav-wrapper {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    padding: 0 1rem;
+  }
+
+  .search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 460px; /* Strong centered wide search bar */
   }
 
   .search-inp {
-    border-radius: 25px;
-    padding: 0.5rem 3rem 0.5rem 3rem;
-    font-size: 1rem;
+    border-radius: 25px !important;
+    padding: 0.6rem 1rem 0.6rem 2.8rem !important;
+    font-size: 0.95rem;
+    border: 1px solid #ddd !important;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06) !important;
+    transition: all 0.2s ease-in-out;
+    width: 100% !important;
+  }
+
+  .search-inp:focus {
+    border-color: #fe424d !important;
+    box-shadow: 0 4px 12px rgba(254, 66, 77, 0.18) !important;
+    outline: none !important;
+  }
+
+  /* Perfectly Centered Search Icon */
+  .search-icon-pos {
+    position: absolute;
+    left: 1.1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #717171;
+    font-size: 0.95rem;
+    pointer-events: none;
+    z-index: 5;
+  }
+
+  @media (max-width: 768px) {
+    .search-nav-wrapper {
+      margin: 0.8rem 0;
+      padding: 0;
+    }
+    .search-container {
+      max-width: 100%;
+    }
   }
 </style>
 
-
 <nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
-  <div class="container-fluid bg-white ">
+  <div class="container-fluid bg-white">
     <a class="navbar-brand" href="/listings"><i class="fa-regular fa-compass"></i></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
       <span class="navbar-toggler-icon"></span>
     </button>
+    
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <!-- Left Menu -->
       <div class="navbar-nav">
         <a class="nav-link" href="/listings">Explore</a>        
       </div>
-      <div class="navbar-nav ms-auto">
-        <form class="d-flex" role="search">
-    <input class="form-control me-2 search-inp" type="search" placeholder="Search destinations" />
-    <button class="btn search-btn" type="submit"><i class="fa-solid fa-magnifying-glass"></i>Search
-    </button>
-       </form>
+      
+      <!-- Guaranteed Centered Search Bar -->
+      <div class="search-nav-wrapper">
+        <div class="search-container">
+          <i class="fa-solid fa-magnifying-glass search-icon-pos"></i>
+          <input id="search-input" class="form-control search-inp" type="search" placeholder="Search destinations" />
+        </div>
       </div>
-      <div class="navbar-nav ms-auto">
+
+      <!-- Right Menu -->
+      <div class="navbar-nav">
         <a class="nav-link" href="/listings/new">Add your Venue</a>
         <% if(!currUser) { %> 
-        <a class="nav-link active"  href="/signup"><b>Sign up</b></a>
-        <a class="nav-link" href="/login"><b>Log in</b></a>
-        <% } %> <% if(currUser) { %>
-        <a class="nav-link" href="/logout"><b>Log out</b></a>
+          <a class="nav-link active" href="/signup"><b>Sign up</b></a>
+          <a class="nav-link" href="/login"><b>Log in</b></a>
+        <% } %> 
+        <% if(currUser) { %>
+          <a class="nav-link" href="/logout"><b>Log out</b></a>
         <% } %>
       </div>
     </div>
