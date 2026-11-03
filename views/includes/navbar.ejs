@@ -75,7 +75,7 @@
       </div>
       
       <!-- Guaranteed Centered Search Bar -->
-      <div class="search-nav-wrapper">
+      <div class="search-nav-wrapper" id="search-wrapper">
         <div class="search-container">
           <i class="fa-solid fa-magnifying-glass search-icon-pos"></i>
           <input id="search-input" class="form-control search-inp" type="search" placeholder="Search destinations" />
@@ -96,3 +96,18 @@
     </div>
   </div>
 </nav>
+
+<script>
+  // Automatically hide search bar on pages other than /listings or root /
+  window.addEventListener("DOMContentLoaded", () => {
+    const currentPath = window.location.pathname;
+    const searchWrapper = document.getElementById("search-wrapper");
+    
+    // hide the search bar if not on /listings or /
+    if (currentPath !== "/listings" && currentPath !== "/") {
+      if (searchWrapper) {
+        searchWrapper.style.display = "none";
+      }
+    }
+  });
+</script>
